@@ -11,6 +11,8 @@
   --grey-50: #78757a;
   --green-80: #088413;
   --green-50-rgb: 55, 182, 53;
+  --blue-50: #00f;
+  --blue-50-rgb: 0, 0, 255;
   --white: #ffffff;
 
   /* radii */
@@ -54,7 +56,7 @@
   /* role-based tokens */
 
   /* colors */
-  --primary: var(--green-80);
+  --primary: var(--blue-50);
   --background: var(--white);
   --border: var(--black-fade-5);
 
@@ -62,7 +64,7 @@
   --transition: box-shadow 0.125s ease-in;
 
   /* shadows */
-  --shadow: 0 4px 12px rgba(var(--green-50-rgb), 0.5);
+  --shadow: 0 4px 12px rgba(var(--blue-50-rgb), 0.5);
 
   /* text */
   /* color */

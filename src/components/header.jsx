@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
-import Logo from "../icons/logo"
+// import Logo from "../icons/logo"
 import { Navigation } from "./navigation"
 import { CartButton } from "./cart-button"
 import SearchIcon from "../icons/search"
@@ -13,6 +13,9 @@ import {
   searchButton,
   nav,
 } from "./header.module.css"
+import { StaticImage } from "gatsby-plugin-image"
+
+const Logo = () => <StaticImage src="../assets/images/icon.png" alt="Turista" />
 
 export function Header() {
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)

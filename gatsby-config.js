@@ -7,7 +7,7 @@ module.exports = {
     siteUrl: "https://shopify-demo.gatsbyjs.com",
     hrefLang: "en",
     siteDescription:
-      "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
+      "Los productos que encantan a los turistas a los mejores precios. Aquí encontrarás desde los Gadgets que utilizas mientras planeas tu viaje pasando por artículos para una vida saludable o quizás los lentes de sol que usarás en tus vacaciones.",
     siteImage: "/default-og-image.jpg",
     twitter: "@gatsbyjs",
   },
@@ -23,6 +23,22 @@ module.exports = {
         shopifyConnections: ["collections"],
       },
     },
+
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Tienda Turista`,
+        short_name: `TiendaTur`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#00f`,
+        display: `standalone`,
+        lang: `es`,
+        icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
+      },
+    },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-styled-components`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
