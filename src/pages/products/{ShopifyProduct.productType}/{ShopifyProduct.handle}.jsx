@@ -170,7 +170,7 @@ export default function Product({ data: { product, suggestions } }) {
                       aria-label="Variants"
                       onChange={(event) => handleOptionChange(index, event)}
                     >
-                      <option value="">{`Select ${name}`}</option>
+                      <option value="">{`Selecciona ${name}`}</option>
                       {values.map((value) => (
                         <option value={value} key={`${name}-${value}`}>
                           {value}

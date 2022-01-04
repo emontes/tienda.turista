@@ -6,21 +6,11 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { getShopifyImage } from "gatsby-source-shopify"
 import DeleteIcon from "../icons/delete"
 import { NumericInput } from "./numeric-input"
-import {
-  title,
-  remove,
-  variant,
-  totals,
-  priceColumn,
-} from "./line-item.module.css"
+import styled from "styled-components"
 
 export function LineItem({ item }) {
-  const {
-    removeLineItem,
-    checkout,
-    updateLineItem,
-    loading,
-  } = React.useContext(StoreContext)
+  const { removeLineItem, checkout, updateLineItem, loading } =
+    React.useContext(StoreContext)
   const [quantity, setQuantity] = React.useState(item.quantity)
 
   const variantImage = {
@@ -80,7 +70,7 @@ export function LineItem({ item }) {
   )
 
   return (
-    <tr>
+    <Wrapper>
       <td>
         {image && (
           <GatsbyImage
@@ -91,17 +81,17 @@ export function LineItem({ item }) {
         )}
       </td>
       <td>
-        <h2 className={title}>{item.title}</h2>
-        <div className={variant}>
+        <h2 className="title">{item.title}</h2>
+        <div className="variant">
           {item.variant.title === "Default Title" ? "" : item.variant.title}
         </div>
-        <div className={remove}>
+        <div className="remove">
           <button onClick={handleRemove}>
-            <DeleteIcon /> Remove
+            <DeleteIcon /> Quitar
           </button>
         </div>
       </td>
-      <td className={priceColumn}>{price}</td>
+      <td className="priceColumn">{price}</td>
       <td>
         <NumericInput
           disabled={loading}
@@ -112,7 +102,49 @@ export function LineItem({ item }) {
           onChange={(e) => handleQuantityChange(e.currentTarget.value)}
         />
       </td>
-      <td className={totals}>{subtotal}</td>
-    </tr>
+      <td className="totals">{subtotal}</td>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.tr`
+  .title {
+    font-size: var(--text-2xl);
+    font-weight: var(--semibold);
+    line-height: var(--solid);
+    padding-bottom: var(--space-md);
+  }
+
+  .variant {
+    font-size: var(--text-md);
+    text-transform: capitalize;
+    padding-bottom: var(--space-sm);
+  }
+
+  .remove button {
+    font-size: var(--text-md);
+
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .remove button svg {
+    margin-right: var(--space-md);
+  }
+
+  .totals {
+    text-align: right;
+  }
+
+  .priceColumn,
+  .totals {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .priceColumn,
+    .totals {
+      display: block;
+    }
+  }
+`

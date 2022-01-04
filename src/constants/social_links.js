@@ -6,8 +6,6 @@ import {
   FaInstagramSquare,
 } from "react-icons/fa"
 
-import { SiUpwork } from "react-icons/si"
-
 const data = [
   {
     id: 1,

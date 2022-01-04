@@ -43,7 +43,7 @@ export function CheckFilter({
             {name}{" "}
             {selectedItems.length ? (
               <button className={clearButton} onClick={clearItems}>
-                Clear
+                Limpiar
               </button>
             ) : undefined}
           </div>

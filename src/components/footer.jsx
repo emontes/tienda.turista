@@ -23,7 +23,6 @@ export function Footer() {
             )
           })}
         </div>
-
         <div className="links">
           <ul>
             <li className="footer__item">
@@ -69,7 +68,10 @@ const Wrapper = styled.footer`
     justify-content: flex-start;
   }
 
+  .left {
+  }
   .right {
+    margin-top: -2.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -80,13 +82,12 @@ const Wrapper = styled.footer`
   }
 
   .social-links {
-    margin-top: -2rem;
-
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 1rem;
   }
   .social-link {
-    font-size: 2.8rem;
+    font-size: 1.8rem;
     color: var(--secondary);
     transition: all 0.3s;
   }
@@ -101,6 +102,10 @@ const Wrapper = styled.footer`
     }
   }
 
+  .links {
+    text-align: center;
+  }
+
   .link {
     color: var(-white);
     border-bottom: 2px solid var(--grey-50);
@@ -109,7 +114,7 @@ const Wrapper = styled.footer`
     display: inline-block;
     transition: all 0.2s;
     :hover {
-      color: var(--primary);
+      color: var(--grey-50);
       transform: scale(1.1);
     }
   }
