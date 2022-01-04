@@ -1,21 +1,12 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
-// import Logo from "../icons/logo"
+import Logo from "../icons/icon"
 import { Navigation } from "./navigation"
 import { CartButton } from "./cart-button"
 import SearchIcon from "../icons/search"
 import { Toast } from "./toast"
-import {
-  header,
-  container,
-  logo as logoCss,
-  searchButton,
-  nav,
-} from "./header.module.css"
-import { StaticImage } from "gatsby-plugin-image"
-
-const Logo = () => <StaticImage src="../assets/images/icon.png" alt="Turista" />
+import styled from "styled-components"
 
 export function Header() {
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
@@ -27,23 +18,23 @@ export function Header() {
   }, 0)
 
   return (
-    <div className={container}>
-      <header className={header}>
-        <Link to="/" className={logoCss}>
+    <Wrapper>
+      <header className="header">
+        <Link to="/" className="logo">
           <Logo />
         </Link>
-        <Navigation className={nav} />
-        <Link to="/search" className={searchButton}>
+        <Navigation className="nav" />
+        <Link to="/search" className="searchButton">
           <SearchIcon />
         </Link>
         <CartButton quantity={quantity} />
       </header>
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
-          "Updating…"
+          "Actualizando…"
         ) : (
           <>
-            Added to cart{" "}
+            Agregado al carrito{" "}
             <svg
               width="14"
               height="14"
@@ -66,6 +57,81 @@ export function Header() {
           </>
         )}
       </Toast>
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+
+  .header {
+    display: grid;
+    width: 100%;
+    padding: var(--size-gap) var(--size-gutter);
+    grid-template-columns: var(--size-input) 1fr min-content min-content;
+    grid-template-areas: "logo nada searchButton cartButton" "navHeader navHeader navHeader navHeader";
+    align-items: center;
+    background-color: var(--background);
+  }
+
+  .header::after {
+    grid-area: navHeader;
+    content: "";
+    display: block;
+    width: var(--space-2xl);
+    z-index: 1;
+    align-self: stretch;
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    justify-self: flex-end;
+  }
+
+  @media (min-width: 640px) {
+    .header {
+      grid-template-areas: "logo navHeader searchButton cartButton";
+    }
+  }
+
+  .logo {
+    height: 2.4rem;
+    display: flex;
+    grid-area: logo;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .logo:hover {
+    border: 1px solid var(--primary);
+    box-shadow: var(--shadow);
+  }
+
+  .nav {
+    grid-area: navHeader;
+    align-self: stretch;
+  }
+
+  .searchButton {
+    color: var(--text-color-secondary);
+    grid-area: searchButton;
+    width: var(--size-input);
+    height: var(--size-input);
+    display: grid;
+    place-items: center;
+  }
+
+  .searchButton:hover {
+    color: var(--text-color);
+  }
+
+  .searchButton[aria-current="page"] {
+    color: var(--primary);
+  }
+`

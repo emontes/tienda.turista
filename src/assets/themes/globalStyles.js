@@ -13,6 +13,24 @@ html {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   touch-action: manipulation;
+
+   /* This defines what 1rem is */
+  font-size: 62.5%; /* 1 rem = 10px; 10px/16px = 62.5% */
+  @media ${device.mobileL} {
+      font-size: 75%; /* 1 rem = 12px 12/16 = .75 */
+  }
+  @media ${device.tablet} {
+    font-size: 87.5%; /* 1 rem = 14px 14/16 = .875 */
+  }
+  @media ${device.laptop} {
+      font-size: 100%; /* 1 rem = 16px 16/16 = 100% */
+  }
+  @media ${device.desktop} {
+      font-size: 112%; /* 1 rem = 18px 18/16 = 1.125% */
+  }
+  @media ${device.desktopL} {
+      font-size: 137.5%; /* 1 rem = 22px 22/16 = 1.375% */
+  }
 }
 body {
   position: relative;

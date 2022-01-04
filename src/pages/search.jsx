@@ -152,7 +152,7 @@ function SearchPage({
 
   return (
     <Layout>
-      <h1 className={visuallyHidden}>Search Results</h1>
+      <h1 className={visuallyHidden}>Resultados de búsqueda</h1>
       <div className={main}>
         <div className={search} aria-hidden={modalOpen}>
           <SearchBar defaultTerm={filters.term} setFilters={setFilters} />
@@ -170,17 +170,17 @@ function SearchPage({
           </button>
           <div className={sortSelector}>
             <label>
-              <span>Sort by:</span>
+              <span>Ordenar por:</span>
               <select
                 value={sortKey}
                 // eslint-disable-next-line
                 onChange={(e) => setSortKey(e.target.value)}
               >
-                <option value="RELEVANCE">Relevance</option>
-                <option value="PRICE">Price</option>
-                <option value="TITLE">Title</option>
-                <option value="CREATED_AT">New items</option>
-                <option value="BEST_SELLING">Trending</option>
+                <option value="RELEVANCE">Relevancia</option>
+                <option value="PRICE">Precio</option>
+                <option value="TITLE">Título</option>
+                <option value="CREATED_AT">Nuevos</option>
+                <option value="BEST_SELLING">Tendencia</option>
               </select>
             </label>
             <SortIcon className={sortIcon} />
@@ -188,7 +188,7 @@ function SearchPage({
         </div>
         <section className={[filterStyle, showModal && modalOpen].join(" ")}>
           <div className={filterTitle}>
-            <h2>Filter</h2>
+            <h2>Filtro</h2>
             <button aria-hidden onClick={() => setShowModal(false)}>
               <CrossIcon />
             </button>
@@ -211,15 +211,15 @@ function SearchPage({
         >
           {isFetching ? (
             <p className={progressStyle}>
-              <Spinner aria-valuetext="Searching" /> Searching
+              <Spinner aria-valuetext="Searching" /> Buscando
               {filters.term ? ` for "${filters.term}"…` : `…`}
             </p>
           ) : (
             <p className={resultsStyle}>
-              Search results{" "}
+              Resultados de búsqueda{" "}
               {filters.term && (
                 <>
-                  for "<span>{filters.term}</span>"
+                  para "<span>{filters.term}</span>"
                 </>
               )}
             </p>
@@ -247,7 +247,7 @@ function SearchPage({
             </ul>
           )}
           {!isFetching && products.length === 0 && (
-            <div className={emptyState}>No results found</div>
+            <div className={emptyState}>No se encontraron resultados</div>
           )}
           {hasPreviousPage || hasNextPage ? (
             <Pagination

@@ -11,6 +11,7 @@
   --grey-50: #78757a;
   --green-80: #088413;
   --green-50-rgb: 55, 182, 53;
+  --blue-60: #221f80;
   --blue-50: #00f;
   --blue-50-rgb: 0, 0, 255;
   --white: #ffffff;
@@ -57,6 +58,7 @@
 
   /* colors */
   --primary: var(--blue-50);
+  --secondary: var(--blue-60);
   --background: var(--white);
   --border: var(--black-fade-5);
 
