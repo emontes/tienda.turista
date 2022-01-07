@@ -1,7 +1,6 @@
 import React from "react"
 import { Layout } from "../components/Layout"
 import styled from "styled-components"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 // import Banner from "../components/Banner";
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -21,6 +20,7 @@ const PolicyTemplate = ({ data }) => {
           <h1>{title}</h1>
 
           <MDXRenderer>{body}</MDXRenderer>
+          <p>Ultima actualización: {date}</p>
         </article>
       </Wrapper>
     </Layout>

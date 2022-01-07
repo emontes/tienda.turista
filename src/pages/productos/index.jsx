@@ -10,10 +10,10 @@ export default function Products({ data: { products } }) {
   return (
     <Layout>
       <Seo title="All Products" />
-      <h1 className={title}>Products</h1>
+      <h1 className={title}>Todos los Productos</h1>
       <ProductListing products={products.nodes} />
       {products.pageInfo.hasNextPage && (
-        <MoreButton to={`/search#more`}>More products</MoreButton>
+        <MoreButton to={`/search#more`}>Más productos</MoreButton>
       )}
     </Layout>
   )
