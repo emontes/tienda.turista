@@ -26,18 +26,18 @@ export function Footer() {
         <div className="links">
           <ul>
             <li className="footer__item">
-              <Link to="/" className="link">
+              <Link to="/politicas/terminos-de-servico" className="link">
                 Términos de Servicio
               </Link>
             </li>
             <li className="footer__item">
-              <Link to="/" className="link">
+              <Link to="/politicas/devoluciones" className="link">
                 Política de Reembolso
               </Link>
             </li>
             <li className="footer__item">
-              <Link to="/" className="link">
-                Política de Privacidad
+              <Link to="/politicas/aviso-de-privacidad" className="link">
+                Aviso de Privacidad
               </Link>
             </li>
           </ul>

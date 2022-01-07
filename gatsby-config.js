@@ -37,6 +37,7 @@ module.exports = {
         icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
       },
     },
+    
     `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-image",
@@ -44,5 +45,18 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `mdx`,
+        path: `${__dirname}/src/mdx`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [{ resolve: "gatsby-remark-images" }],
+      },
+    }, //   resolve: `gatsby-source-filesystem`,
   ].filter(Boolean),
 }
