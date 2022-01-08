@@ -68,6 +68,8 @@ const Wrapper = styled.div`
   z-index: 1;
   top: 0;
 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
   .header {
     display: grid;
     width: 100%;

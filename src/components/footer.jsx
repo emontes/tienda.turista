@@ -54,7 +54,7 @@ export function Footer() {
 }
 
 const Wrapper = styled.footer`
-  background-color: var(--grey-90);
+  background-color: var(--grey-50);
   padding: 3rem;
   color: var(--white);
   display: flex;
@@ -62,6 +62,7 @@ const Wrapper = styled.footer`
   align-items: center;
   justify-content: center;
   gap: 3rem;
+  box-shadow: var(--shadow);
 
   @media ${device.tablet} {
     flex-direction: row;
@@ -114,7 +115,7 @@ const Wrapper = styled.footer`
     display: inline-block;
     transition: all 0.2s;
     :hover {
-      color: var(--grey-50);
+      color: var(--grey-90);
       transform: scale(1.1);
     }
   }

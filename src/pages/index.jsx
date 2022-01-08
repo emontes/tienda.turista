@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { Layout } from "../components/layout"
 import { ProductListing } from "../components/product-listing"
+import Collections from "../components/Collections"
 
 import HeroSlider from "../components/HeroSlider"
 
@@ -19,6 +20,7 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <HeroSlider />
+      <Collections />
       <ProductListing products={data?.shopifyCollection?.products} />
     </Layout>
   )

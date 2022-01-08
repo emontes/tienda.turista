@@ -112,7 +112,7 @@ export default function CartPage() {
               disabled={loading}
               className={checkoutButton}
             >
-              Comprar
+              Finalizar Pedido
             </button>
           </>
         )}

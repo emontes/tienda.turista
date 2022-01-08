@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import DataSlider from "../constants/home-slides"
 
 const HeroSlider = () => {
   const settings = {
@@ -18,42 +19,22 @@ const HeroSlider = () => {
   }
   return (
     <Wrapper {...settings}>
-      <div className="slide">
-        <StaticImage
-          className="hero-img"
-          src="../assets/images/slider-1.png"
-          alt="slider 1"
-          placeholder="tracedSVG"
-          layout="constrained"
-        />
-        <div className="hero-container">
-          <Centro
-            leth2="Tienda"
-            leth3="Los Artículos que le encantan al Turista"
-            leth4="Nuevos Artículos"
-            linkText="Ver Productos"
-            linkGo="/productos"
-          />
-        </div>
-      </div>
-      <div className="slide">
-        <StaticImage
-          className="hero-img"
-          src="../assets/images/slider-2.png"
-          alt="slider 2"
-          placeholder="tracedSVG"
-          layout="constrained"
-        />
-        <div className="hero-container">
-          <Centro
-            leth2="Tecno"
-            leth3="Artículos Novedosos en Tecnología"
-            leth4="Accesorios y más"
-            linkText="Compra Ahora"
-            linkGo="/electronica"
-          />
-        </div>
-      </div>
+      {DataSlider.map((item) => {
+        return (
+          <div className="slide" key={item.id}>
+            {item.image}
+            <div className="hero-container">
+              <Centro
+                leth2={item.leth2}
+                leth3={item.leth3}
+                leth4={item.leth4}
+                linkText={item.linkText}
+                linkGo={item.linkGo}
+              />
+            </div>
+          </div>
+        )
+      })}
     </Wrapper>
   )
 }
@@ -95,15 +76,15 @@ const Wrapper = styled(Slider)`
     height: 100%;
     display: flex;
     align-items: center;
-    background: linear-gradient(
+    /* background: linear-gradient(
       to bottom right,
       rgba(0, 0, 255, 0.3),
       rgba(255, 255, 255, 0.2)
-    );
+    ); */
   }
 
   .bg-radius {
-    background: #fff;
+    background: var(--white);
     border-radius: 50%;
     margin-left: 5%;
     width: 23.2rem;

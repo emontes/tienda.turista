@@ -1,16 +1,39 @@
 import * as React from "react"
 import { Layout } from "../components/layout"
-import { heading, paragraph, container } from "./404.module.css"
+import styled from "styled-components"
 
 export default function NotFoundPage() {
   return (
     <Layout>
-      <div className={container}>
-        <h1 className={heading}>Page Not Found</h1>
-        <p className={paragraph}>
-          Sorry, we couldn't find what you were looking for
-        </p>
-      </div>
+      <Wrapper>
+        <h1 className="heading">Página no encontrada</h1>
+        <p className="paragraph">Lo siento, no encontramos lo que buscas..</p>
+      </Wrapper>
     </Layout>
   )
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  min-height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--size-gutter-raw);
+  padding-right: var(--size-gutter-raw);
+  margin-top: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .heading {
+    line-height: var(--dense);
+    font-size: var(--text-display);
+    font-weight: var(--bold);
+  }
+
+  .paragraph {
+    font-size: var(--text-lg);
+    margin-top: var(--space-2xl);
+  }
+`
