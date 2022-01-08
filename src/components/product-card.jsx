@@ -3,14 +3,7 @@ import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { getShopifyImage } from "gatsby-source-shopify"
 import { formatPrice } from "../utils/format-price"
-import {
-  productCardStyle,
-  productHeadingStyle,
-  productImageStyle,
-  productDetailsStyle,
-  productVendorStyle,
-  productPrice,
-} from "./product-card.module.css"
+import styled from "styled-components"
 
 export function ProductCard({ product, eager }) {
   const {
@@ -48,13 +41,9 @@ export function ProductCard({ product, eager }) {
     firstImage || Object.getOwnPropertyNames(storefrontImageData || {}).length
 
   return (
-    <Link
-      className={productCardStyle}
-      to={slug}
-      aria-label={`View ${title} product page`}
-    >
+    <Wrapper to={slug} aria-label={`View ${title} product page`}>
       {hasImage ? (
-        <div className={productImageStyle} data-name="product-image-box">
+        <div className="productImageStyle" data-name="product-image-box">
           <GatsbyImage
             alt={firstImage?.altText ?? title}
             image={firstImage?.gatsbyImageData ?? storefrontImageData}
@@ -64,23 +53,66 @@ export function ProductCard({ product, eager }) {
       ) : (
         <div style={{ height: defaultImageHeight, width: defaultImageWidth }} />
       )}
-      <div className={productDetailsStyle}>
-        <div className={productVendorStyle}>{vendor}</div>
-        <h2 as="h2" className={productHeadingStyle}>
+      <div className="productDetailsStyle">
+        <div className="productVendorStyle">{vendor}</div>
+        <h2 as="h2" className="productHeadingStyle">
           {title}
         </h2>
-        <div className={productPrice}>{price}</div>
+        <div className="productPrice">{price}</div>
       </div>
-    </Link>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled(Link)`
+  max-width: 400px;
+  cursor: pointer;
+  text-decoration: none;
+  padding-bottom: var(--space-md);
+  transition: all 0.3s;
+  :hover {
+    box-shadow: var(--dark-shadow);
+    transform: scale(1.1);
+  }
+
+  .productImageStyle {
+    margin-bottom: var(--space-md);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .productDetailsStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--semibold);
+  }
+
+  .productVendorStyle {
+    font-size: var(--text-sm);
+    color: var(--text-color-secondary);
+  }
+
+  .productHeadingStyle {
+    width: 100%;
+    font-size: var(--text-lg);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: var(--dense);
+  }
+
+  .productPrice {
+    color: var(--text-color-secondary);
+  }
+`
 
 export const query = graphql`
   fragment ProductCard on ShopifyProduct {
     id
     title
     slug: gatsbyPath(
-      # filePath: "/productos/{ShopifyProduct.productType}/{ShopifyProduct.handle}"
       filePath: "/{ShopifyProduct.productType}/{ShopifyProduct.handle}"
     )
     images {

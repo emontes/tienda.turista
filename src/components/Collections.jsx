@@ -53,7 +53,6 @@ export default Collections
 
 const Wrapper = styled.div`
   padding: 3rem 2rem;
-
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
@@ -62,11 +61,26 @@ const Wrapper = styled.div`
   @media ${device.tablet} {
     flex-direction: row;
   }
+
   .collection {
     position: relative;
-    @media ${device.tablet} {
-      width: 25rem;
+    overflow: hidden;
+    transition: all 0.2s;
+    :hover {
+      box-shadow: var(--light-shadow);
+      .image {
+        transform: scale(1.2);
+        filter: blur(3px) brightness(50%);
+      }
     }
+    @media ${device.tablet} {
+      width: 31%;
+    }
+  }
+  .image {
+    height: 100%;
+
+    transition: all 0.5s;
   }
   .container {
     position: absolute;
@@ -102,12 +116,6 @@ const Wrapper = styled.div`
     transition: all 0.2s;
     :hover {
       box-shadow: var(--shadow);
-    }
-  }
-  .image {
-    height: 20rem;
-    :hover {
-      border: 3px solid red;
     }
   }
 `

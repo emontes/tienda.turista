@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Layout } from "../components/layout"
 import styled from "styled-components"
+import Collections from "../components/Collections"
 
 export default function NotFoundPage() {
   return (
@@ -8,6 +9,8 @@ export default function NotFoundPage() {
       <Wrapper>
         <h1 className="heading">Página no encontrada</h1>
         <p className="paragraph">Lo siento, no encontramos lo que buscas..</p>
+        <p>Puedes Intentar buscar en nuestras colecciones</p>
+        <Collections />
       </Wrapper>
     </Layout>
   )

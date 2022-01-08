@@ -9,12 +9,14 @@
   --black-fade-40: rgba(0, 0, 0, 0.4);
   --grey-90: #232129;
   --grey-50: #78757a;
+  --grey-40: hsl(210, 22%, 49%);
   --green-80: #088413;
   --green-50-rgb: 55, 182, 53;
   --blue-60: #221f80;
   --blue-50: #00f;
   --blue-50-rgb: 0, 0, 255;
   --white: #ffffff;
+  --clr-white-transparency-8: rgba(255, 255, 255, 0.8);
 
   /* radii */
   --radius-sm: 4px;
@@ -67,6 +69,8 @@
 
   /* shadows */
   --shadow: 0 4px 12px rgba(var(--blue-50-rgb), 0.5);
+   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
   /* text */
   /* color */

@@ -54,7 +54,7 @@ export function Footer() {
 }
 
 const Wrapper = styled.footer`
-  background-color: var(--grey-50);
+  background-color: var(--grey-40);
   padding: 3rem;
   color: var(--white);
   display: flex;
@@ -108,8 +108,8 @@ const Wrapper = styled.footer`
   }
 
   .link {
-    color: var(-white);
-    border-bottom: 2px solid var(--grey-50);
+    color: var(--white);
+    border-bottom: 2px solid var(--grey-90);
     text-decoration: none;
     text-transform: uppercase;
     display: inline-block;

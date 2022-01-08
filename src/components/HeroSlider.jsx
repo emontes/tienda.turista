@@ -2,7 +2,7 @@ import React from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import { StaticImage } from "gatsby-plugin-image"
+
 import styled from "styled-components"
 import { Link } from "gatsby"
 import DataSlider from "../constants/home-slides"
