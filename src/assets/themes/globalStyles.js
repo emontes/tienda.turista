@@ -59,6 +59,64 @@ main {
   border-radius: var(--radius-sm);
 }
 
+/*
+==============
+Animation 
+==============
+*/
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    /* transform: translateX(-10rem) rotate(-60deg); */
+    transform: translateX(-16rem);
+  }
+
+  60% {
+    /* transform: rotate(120deg); */
+  }
+
+  80% {
+    transform: translateX(1.6rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(16rem);
+  }
+
+  80% {
+    transform: translateX(-1.6rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(4.8rem);
+  }
+
+  80% {
+    transform: translateY(-1.6rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 `
 
 export default GlobalStyle
