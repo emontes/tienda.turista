@@ -1,11 +1,11 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Layout } from "../../../components/layout"
-import { ProductListing } from "../../../components/product-listing"
-import { Seo } from "../../../components/seo"
+import { Layout } from "../../components/layout"
+import { ProductListing } from "../../components/product-listing"
+import { Seo } from "../../components/seo"
 import slugify from "@sindresorhus/slugify"
-import { MoreButton } from "../../../components/more-button"
-import { title } from "../index.module.css"
+import { MoreButton } from "../../components/more-button"
+// import { title } from "../index.module.css"
 
 export default function Products({
   data: { products },
@@ -14,7 +14,8 @@ export default function Products({
   return (
     <Layout>
       <Seo title={`${vendor} products`} />
-      <h1 className={title}>{vendor}</h1>
+      {/* <h1 className={title}>{vendor}</h1> */}
+      <h1>{vendor}</h1>
       <ProductListing products={products.nodes} />
       {products.pageInfo.hasNextPage && (
         <MoreButton to={`/search?v=${slugify(vendor)}#more`}>

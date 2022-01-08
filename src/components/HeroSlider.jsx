@@ -50,7 +50,7 @@ const HeroSlider = () => {
             leth3="Artículos Novedosos en Tecnología"
             leth4="Accesorios y más"
             linkText="Compra Ahora"
-            linkGo="/productos/electronica"
+            linkGo="/electronica"
           />
         </div>
       </div>

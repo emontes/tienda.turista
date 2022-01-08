@@ -28,7 +28,7 @@ export function Navigation({ className }) {
         <Link
           key={name}
           className={navLink}
-          to={`/productos/${slugify(name)}`}
+          to={`/${slugify(name)}`}
           activeClassName={activeLink}
         >
           {name}
