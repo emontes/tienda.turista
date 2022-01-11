@@ -7,7 +7,7 @@ const services = [
     id: 1,
     icon: <BsBasket2Fill className="service-icon" />,
     title: "Envío Gratis",
-    text: "En pedidos de más de $1,980",
+    text: "En pedidos de más de $1,800",
   },
   {
     id: 3,

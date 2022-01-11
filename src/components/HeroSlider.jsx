@@ -55,16 +55,15 @@ const Centro = ({ leth2, leth3, leth4, linkText, linkGo }) => {
 export default HeroSlider
 
 const Wrapper = styled(Slider)`
-  margin-bottom: 3rem;
   text-align: center;
 
   .hero-img {
     width: 100%;
-    height: 59vh;
+    height: 58vh;
   }
 
   .slide {
-    height: 59vh;
+    height: 58vh;
     position: relative;
   }
 

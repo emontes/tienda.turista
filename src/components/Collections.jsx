@@ -21,7 +21,7 @@ const query = graphql`
 
 const Collections = () => {
   const data = useStaticQuery(query)
-  console.log("-----> data", data)
+
   return (
     <Wrapper>
       {data.collections.nodes.map((item, index) => {

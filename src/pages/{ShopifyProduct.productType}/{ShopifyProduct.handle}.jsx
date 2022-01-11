@@ -28,11 +28,17 @@ import {
   metaSection,
   productDescription,
 } from "./product-page.module.css"
+import styled from "styled-components"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import device from "../../assets/themes/device"
 
 export default function Product({ data: { product, suggestions } }) {
   const {
     options,
     variants,
+    collections,
     variants: [initialVariant],
     priceRangeV2,
     title,
@@ -102,85 +108,98 @@ export default function Product({ data: { product, suggestions } }) {
   const hasVariants = variants.length > 1
   const hasImages = images.length > 0
   const hasMultipleImages = true || images.length > 1
+  const sliderSettings = {
+    infinite: true,
+    speed: 1500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 8000,
 
+    dots: true,
+    pauseOnHover: true,
+  }
   return (
     <Layout>
       {firstImage ? (
         <Seo
           title={title}
-          description={description}
+          description={description.substring(0, 250)}
           image={getSrc(firstImage.gatsbyImageData)}
         />
       ) : undefined}
-      <div className={container}>
-        <div className={productBox} style={{ borderBottom: "1px solid green" }}>
+      <Wrapper>
+        <div className="product-box" style={{ marginBottom: "2rem" }}>
           {hasImages && (
-            <div className={productImageWrapper}>
-              <div
-                role="group"
-                aria-label="gallery"
-                aria-describedby="instructions"
-              >
-                <ul className={productImageList}>
-                  {images.map((image, index) => (
-                    <li
-                      key={`product-image-${image.id}`}
-                      className={productImageListItem}
-                    >
-                      <GatsbyImage
-                        objectFit="contain"
-                        loading={index === 0 ? "eager" : "lazy"}
-                        alt={
-                          image.altText
-                            ? image.altText
-                            : `Product Image of ${title} #${index + 1}`
-                        }
-                        image={image.gatsbyImageData}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {hasMultipleImages && (
-                <div className={scrollForMore} id="instructions">
-                  <span aria-hidden="true">←</span> scroll for more{" "}
-                  <span aria-hidden="true">→</span>
-                </div>
-              )}
-            </div>
+            <Slider className="slider" {...sliderSettings}>
+              {images.map((image, index) => {
+                return (
+                  <div className="slide" key={index}>
+                    <GatsbyImage
+                      objectFit="cover"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      alt={
+                        image.altText
+                          ? image.altText
+                          : `Imagen del Producto ${title} #${index + 1}`
+                      }
+                      image={image.gatsbyImageData}
+                      className="product-image"
+                    />
+                  </div>
+                )
+              })}
+            </Slider>
           )}
           {!hasImages && (
-            <span className={noImagePreview}>No Preview image</span>
+            <span className="no-image-preview">No tiene imagen</span>
           )}
           <div>
-            <div className={breadcrumb}>
+            <div className="breadcrumb">
               <Link to={product.productTypeSlug}>{product.productType}</Link>
               <ChevronIcon size={12} />
             </div>
-            <h1 className={header}>{title}</h1>
+            <h1 className="header">{title}</h1>
 
-            <h2 className={priceValue}>
-              <span>{price}</span>
-            </h2>
-            <fieldset className={optionsWrapper}>
-              {hasVariants &&
-                options.map(({ id, name, values }, index) => (
-                  <div className={selectVariant} key={id}>
-                    <select
-                      aria-label="Variants"
-                      onChange={(event) => handleOptionChange(index, event)}
-                    >
-                      <option value="">{`Selecciona ${name}`}</option>
-                      {values.map((value) => (
-                        <option value={value} key={`${name}-${value}`}>
-                          {value}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-            </fieldset>
-            <div className={addToCartStyle}>
+            <div className="price-options-wrapper">
+              <h2 className="price-value">
+                <span>{price}</span>
+              </h2>
+              <fieldset className="options-wrapper">
+                {hasVariants &&
+                  options.map(({ id, name, values }, index) => {
+                    const { image } = variant
+
+                    return (
+                      <div key={id}>
+                        <div className="select-variant" key={id}>
+                          <select
+                            aria-label="Variants"
+                            onChange={(event) =>
+                              handleOptionChange(index, event)
+                            }
+                          >
+                            {/* <option value="">{`Selecciona ${name}`}</option> */}
+                            {values.map((value) => (
+                              <option value={value} key={`${name}-${value}`}>
+                                {value}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        {image && (
+                          <GatsbyImage
+                            image={variant.image.gatsbyImageData}
+                            alt="image"
+                            className="product-image"
+                          />
+                        )}
+                      </div>
+                    )
+                  })}
+              </fieldset>
+            </div>
+            <div className="add-to-cart-style">
               <NumericInput
                 aria-label="Quantity"
                 onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
@@ -197,14 +216,22 @@ export default function Product({ data: { product, suggestions } }) {
               />
             </div>
             <div className={metaSection}>
-              <span className={labelFont}>Type</span>
-              <span className={tagList}>
-                <Link to={product.productTypeSlug}>{product.productType}</Link>
+              <span className="label-font">Colección</span>
+              <span className="tag-list">
+                {product.collections.map((collection, index) => {
+                  return (
+                    <Link to={`/coleccion/${collection.handle}`} key={index}>
+                      {collection.title}
+                    </Link>
+                  )
+                })}
               </span>
-              <span className={labelFont}>Tags</span>
-              <span className={tagList}>
-                {product.tags.map((tag) => (
-                  <Link to={`/search?t=${tag}`}>{tag}</Link>
+              <span className="label-font">Etiquetas</span>
+              <span className="tag-list">
+                {product.tags.map((tag, index) => (
+                  <Link to={`/search?t=${tag}`} key={index}>
+                    {tag}
+                  </Link>
                 ))}
               </span>
             </div>
@@ -216,10 +243,175 @@ export default function Product({ data: { product, suggestions } }) {
           className={productDescription}
           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
         />
-      </div>
+      </Wrapper>
     </Layout>
   )
 }
+
+const Wrapper = styled.div`
+  padding: var(--size-gutter-raw);
+  .product-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: var(--space-3xl);
+    @media ${device.tablet} {
+      grid-template-columns: 1fr 2fr;
+    }
+    @media ${device.laptop} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .slider {
+    width: 90vw;
+    margin: 0 auto;
+    @media ${device.tablet} {
+      width: 45vw;
+    }
+    @media ${device.tablet} {
+      width: 35vw;
+    }
+  }
+
+  .product-image {
+    transition: all 1s;
+    :hover {
+      box-shadow: var(--dark-shadow);
+      transform: scale(1.5);
+    }
+  }
+
+  .header {
+    font-size: var(--text-display);
+    font-weight: var(--bold);
+    margin-bottom: var(--space-xl);
+    line-height: var(--dense);
+  }
+
+  .productDescription {
+    font-size: var(--text-prose);
+  }
+
+  .no-image-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    font-size: var(--text-lg);
+  }
+
+  .price-options-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .price-value > span {
+    font-size: var(--text-display);
+    font-weight: var(--bold);
+    line-height: var(--dense);
+    color: var(--primary);
+  }
+
+  .price-value {
+    padding: var(--space-lg) 0;
+  }
+
+  .options-wrapper {
+    display: grid;
+    grid-template-columns: var(--product-grid);
+    gap: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .add-to-cart-style {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: var(--space-lg);
+    @media ${device.tablet} {
+      grid-template-columns: min-content max-content;
+    }
+  }
+
+  .select-variant {
+    background-color: var(--input-background);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    margin-top: var(--space-md);
+    min-width: 24ch;
+    position: relative;
+  }
+
+  .select-variant select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    color: var(--input-text);
+    cursor: inherit;
+    font-size: var(--text-md);
+    font-weight: var(--medium);
+    height: var(--size-input);
+    margin: 0;
+    padding: var(--space-sm) var(--space-lg);
+    padding-right: var(--space-2xl);
+    width: 100%;
+  }
+
+  .select-variant::after {
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' height='8' viewBox='0 0 13 8' width='13' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m6.87794 7.56356c-.19939.23023-.55654.23024-.75593 0l-5.400738-6.23623c-.280438-.32383-.050412-.82733.377968-.82733h10.80146c.4284 0 .6584.5035.378.82733z' fill='%2378757a'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    content: "";
+    height: 8px;
+    position: absolute;
+    right: var(--space-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+    pointer-events: none;
+  }
+
+  .label-font {
+    font-size: var(--space-lg);
+    line-height: var(--space-xl);
+    padding-right: var(--space-md);
+    color: var(--text-color-secondary);
+  }
+
+  .tag-list {
+    margin-bottom: 5px;
+    a {
+      font-weight: var(--semibold);
+      color: var(--text-color-secondary);
+      margin-right: var(--space-md);
+      border: 1px solid #e5e5e5;
+      padding: 2px 5px;
+      transition: all 0.3s;
+      :hover {
+        color: var(--white);
+        background: var(--grey-90);
+      }
+    }
+  }
+
+  .breadcrumb {
+    color: var(--text-color-secondary);
+    font-size: var(--text-sm);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--text-color);
+    text-decoration: underline;
+  }
+
+  .metaSection {
+    padding-top: var(--space-3xl);
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: baseline;
+  }
+`
 
 export const query = graphql`
   query($id: String!, $productType: String!) {
@@ -232,6 +424,10 @@ export const query = graphql`
         # filePath: "/productos/{ShopifyProduct.productType}"
         filePath: "/{ShopifyProduct.productType}"
       )
+      collections {
+        handle
+        title
+      }
       tags
       priceRangeV2 {
         maxVariantPrice {
@@ -254,6 +450,9 @@ export const query = graphql`
         storefrontId
         title
         price
+        image {
+          gatsbyImageData
+        }
         selectedOptions {
           name
           value
