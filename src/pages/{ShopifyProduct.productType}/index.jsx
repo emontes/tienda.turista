@@ -5,7 +5,7 @@ import { ProductListing } from "../../components/product-listing"
 import { Seo } from "../../components/seo"
 import slugify from "@sindresorhus/slugify"
 import { MoreButton } from "../../components/more-button"
-// import { title } from "../index.module.css"
+import { title } from "../productos/index.module.css"
 
 export default function ProductTypeIndex({
   data: { products },
@@ -14,8 +14,8 @@ export default function ProductTypeIndex({
   return (
     <Layout>
       <Seo title={`Category: ${productType}`} />
-      {/* <h1 className={title}>{productType}</h1> */}
-      <h1>{productType}</h1>
+      <h1 className={title}>{productType}</h1>
+
       <ProductListing products={products.nodes} />
       {products.pageInfo.hasNextPage && (
         <MoreButton to={`/search?p=${slugify(productType)}#more`}>

@@ -9,25 +9,7 @@ import { NumericInput } from "../../components/numeric-input"
 import { formatPrice } from "../../utils/format-price"
 import { Seo } from "../../components/seo"
 import { CgChevronRight as ChevronIcon } from "react-icons/cg"
-import {
-  productBox,
-  container,
-  header,
-  productImageWrapper,
-  productImageList,
-  productImageListItem,
-  scrollForMore,
-  noImagePreview,
-  optionsWrapper,
-  priceValue,
-  selectVariant,
-  labelFont,
-  breadcrumb,
-  tagList,
-  addToCartStyle,
-  metaSection,
-  productDescription,
-} from "./product-page.module.css"
+
 import styled from "styled-components"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
@@ -132,7 +114,7 @@ export default function Product({ data: { product, suggestions } }) {
         <div className="product-box" style={{ marginBottom: "2rem" }}>
           {hasImages && (
             <Slider className="slider" {...sliderSettings}>
-              {images.map((image, index) => {
+              {images.slice(0, 14).map((image, index) => {
                 return (
                   <div className="slide" key={index}>
                     <GatsbyImage
@@ -154,7 +136,7 @@ export default function Product({ data: { product, suggestions } }) {
           {!hasImages && (
             <span className="no-image-preview">No tiene imagen</span>
           )}
-          <div>
+          <div className="product-details">
             <div className="breadcrumb">
               <Link to={product.productTypeSlug}>{product.productType}</Link>
               <ChevronIcon size={12} />
@@ -191,7 +173,7 @@ export default function Product({ data: { product, suggestions } }) {
                           <GatsbyImage
                             image={variant.image.gatsbyImageData}
                             alt="image"
-                            className="product-image"
+                            className=""
                           />
                         )}
                       </div>
@@ -215,7 +197,7 @@ export default function Product({ data: { product, suggestions } }) {
                 available={available}
               />
             </div>
-            <div className={metaSection}>
+            <div className="meta-section">
               <span className="label-font">Colección</span>
               <span className="tag-list">
                 {product.collections.map((collection, index) => {
@@ -240,9 +222,29 @@ export default function Product({ data: { product, suggestions } }) {
         {/* <p className={productDescription}>{description}</p> */}
 
         <div
-          className={productDescription}
+          className="product-description"
           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
         />
+        {hasImages && (
+          <div className="bottom-images">
+            {images.map((image, index) => {
+              return (
+                <GatsbyImage
+                  key={index}
+                  objectFit="cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  alt={
+                    image.altText
+                      ? image.altText
+                      : `Imagen del Producto ${title} #${index + 1}`
+                  }
+                  image={image.gatsbyImageData}
+                  className="bottom-image"
+                />
+              )
+            })}
+          </div>
+        )}
       </Wrapper>
     </Layout>
   )
@@ -256,20 +258,29 @@ const Wrapper = styled.div`
     column-gap: var(--space-3xl);
     @media ${device.tablet} {
       grid-template-columns: 1fr 2fr;
+      column-gap: 2rem;
     }
     @media ${device.laptop} {
       grid-template-columns: repeat(2, 1fr);
+      column-gap: 0;
+    }
+  }
+
+  .product-details {
+    margin-top: 3rem;
+    @media ${device.tablet} {
+      margin-top: 0;
     }
   }
 
   .slider {
-    width: 90vw;
-    margin: 0 auto;
+    width: 92vw;
+
     @media ${device.tablet} {
-      width: 45vw;
+      width: 95vw;
     }
     @media ${device.tablet} {
-      width: 35vw;
+      width: 45vw;
     }
   }
 
@@ -288,7 +299,10 @@ const Wrapper = styled.div`
     line-height: var(--dense);
   }
 
-  .productDescription {
+  .product-description {
+    margin: 3rem auto;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
     font-size: var(--text-prose);
   }
 
@@ -405,11 +419,22 @@ const Wrapper = styled.div`
     text-decoration: underline;
   }
 
-  .metaSection {
+  .meta-section {
     padding-top: var(--space-3xl);
     display: grid;
+    gap: 1rem;
     grid-template-columns: max-content 1fr;
     align-items: baseline;
+  }
+  .bottom-images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .bottom-image {
+    height: 100%;
+    box-shadow: var(--light-shadow);
   }
 `
 
