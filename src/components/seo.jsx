@@ -43,7 +43,8 @@ export function Seo({
     title: title || siteTitleDefault,
     description: description || siteDescription,
     url: pathname ? `${siteUrl}${pathname}` : location.href,
-    image: `${siteUrl}${image || siteImage}`,
+    // image: `${siteUrl}${image || siteImage}`,
+    image: `${image || siteImage}`,
   }
 
   return (
@@ -85,10 +86,7 @@ export function Seo({
       />
       {/* The following meta tag is for demonstration only and can be removed */}
       {!!process.env.GATSBY_DEMO_STORE && (
-        <meta
-          name="robots"
-          content="noindex, nofollow"
-        />
+        <meta name="robots" content="noindex, nofollow" />
       )}
       {children}
     </Helmet>

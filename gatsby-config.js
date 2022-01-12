@@ -4,12 +4,12 @@ module.exports = {
   siteMetadata: {
     siteTitle: "Tienda Turista",
     siteTitleDefault: "Tienda del Turista",
-    siteUrl: "https://shopify-demo.gatsbyjs.com",
-    hrefLang: "en",
+    siteUrl: "https://tienda.turista.com.mx",
+    hrefLang: "es",
     siteDescription:
       "Los productos que encantan a los turistas a los mejores precios. Aquí encontrarás desde los Gadgets que utilizas mientras planeas tu viaje pasando por artículos para una vida saludable o quizás los lentes de sol que usarás en tus vacaciones.",
     siteImage: "/default-og-image.jpg",
-    twitter: "@gatsbyjs",
+    twitter: "@turistamexico",
   },
   flags: {
     FAST_DEV: true,
@@ -37,7 +37,7 @@ module.exports = {
         icon: `src/assets/images/logo.png`, // This path is relative to the root of the site.
       },
     },
-    
+
     `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-image",
