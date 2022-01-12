@@ -94,7 +94,8 @@ export default function CartPage() {
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={labelColumn}>Envío</td>
-                  <td className={totals}>Calculado en el siguiente paso</td>
+
+                  <td className={totals}>Al ingresar tu dirección</td>
                 </tr>
                 <tr className={grandTotal}>
                   <td className={collapseColumn}></td>
