@@ -74,18 +74,21 @@ export default function CartPage() {
                     )}
                   </td>
                 </tr>
-                <tr className={summary}>
-                  <td className={collapseColumn}></td>
-                  <td className={collapseColumn}></td>
-                  <td className={collapseColumn}></td>
-                  <td className={labelColumn}>Impuestos</td>
-                  <td className={totals}>
-                    {formatPrice(
-                      checkout.totalTaxV2.currencyCode,
-                      checkout.totalTaxV2.amount
-                    )}
-                  </td>
-                </tr>
+                {checkout.totalTaxV2.amount > 0 ? (
+                  <tr className={summary}>
+                    <td className={collapseColumn}></td>
+                    <td className={collapseColumn}></td>
+                    <td className={collapseColumn}></td>
+                    <td className={labelColumn}>Impuestos</td>
+                    <td className={totals}>
+                      {formatPrice(
+                        checkout.totalTaxV2.currencyCode,
+                        checkout.totalTaxV2.amount
+                      )}
+                    </td>
+                  </tr>
+                ) : null}
+
                 <tr className={summary}>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
