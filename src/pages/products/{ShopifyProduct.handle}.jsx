@@ -16,7 +16,8 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import device from "../../assets/themes/device"
 
-export default function Product({ data: { product, suggestions } }) {
+export default function Product({ data: { product } }) {
+  console.log(" ----> producto", product)
   const {
     options,
     variants,
@@ -262,7 +263,6 @@ const Wrapper = styled.div`
     }
     @media ${device.laptop} {
       grid-template-columns: repeat(2, 1fr);
-      column-gap: 0;
     }
   }
 
@@ -428,7 +428,8 @@ const Wrapper = styled.div`
   }
   .bottom-images {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
   }
@@ -439,15 +440,17 @@ const Wrapper = styled.div`
 `
 
 export const query = graphql`
-  query($id: String!, $productType: String!) {
+  # query($id: String!, $productType: String!) {
+  query($id: String!) {
+    # product: shopifyProduct(id: { eq: $id }) {
     product: shopifyProduct(id: { eq: $id }) {
       title
       description
       descriptionHtml
       productType
       productTypeSlug: gatsbyPath(
-        # filePath: "/productos/{ShopifyProduct.productType}"
-        filePath: "/{ShopifyProduct.productType}"
+        filePath: "/products/{ShopifyProduct.productType}"
+        #filePath: "/{ShopifyProduct.productType}"
       )
       collections {
         handle
@@ -489,13 +492,13 @@ export const query = graphql`
         id
       }
     }
-    suggestions: allShopifyProduct(
-      limit: 3
-      filter: { productType: { eq: $productType }, id: { ne: $id } }
-    ) {
-      nodes {
-        ...ProductCard
-      }
-    }
+    # suggestions: allShopifyProduct(
+    #   limit: 3
+    #   filter: { productType: { eq: $productType }, id: { ne: $id } }
+    # ) {
+    #   nodes {
+    #     ...ProductCard
+    #   }
+    # }
   }
 `

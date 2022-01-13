@@ -19,7 +19,7 @@ export function Navigation({ className }) {
       <Link
         key="All"
         className={navLink}
-        to="/productos/"
+        to="/products/"
         activeClassName={activeLink}
       >
         Todos
@@ -28,7 +28,7 @@ export function Navigation({ className }) {
         <Link
           key={name}
           className={navLink}
-          to={`/${slugify(name)}`}
+          to={`/products/${slugify(name)}`}
           activeClassName={activeLink}
         >
           {name}

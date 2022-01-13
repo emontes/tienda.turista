@@ -22,7 +22,7 @@ export default function Products({ data: { products } }) {
 export const query = graphql`
   {
     products: allShopifyProduct(
-      # sort: { fields: publishedAt, order: ASC }
+      sort: { fields: publishedAt, order: DESC }
       limit: 24
     ) {
       nodes {

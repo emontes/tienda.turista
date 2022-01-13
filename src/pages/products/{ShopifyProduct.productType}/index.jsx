@@ -1,11 +1,11 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Layout } from "../../components/layout"
-import { ProductListing } from "../../components/product-listing"
-import { Seo } from "../../components/seo"
+import { Layout } from "../../../components/layout"
+import { ProductListing } from "../../../components/product-listing"
+import { Seo } from "../../../components/seo"
 import slugify from "@sindresorhus/slugify"
-import { MoreButton } from "../../components/more-button"
-import { title } from "../productos/index.module.css"
+import { MoreButton } from "../../../components/more-button"
+import { title } from "../index.module.css"
 
 export default function ProductTypeIndex({
   data: { products },
@@ -18,9 +18,7 @@ export default function ProductTypeIndex({
 
       <ProductListing products={products.nodes} />
       {products.pageInfo.hasNextPage && (
-        <MoreButton to={`/search?p=${slugify(productType)}#more`}>
-          Más Productos
-        </MoreButton>
+        <MoreButton to={`/search?p=${productType}`}>Más Productos</MoreButton>
       )}
     </Layout>
   )
