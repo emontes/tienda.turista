@@ -20,6 +20,7 @@ import {
   emptyStateLink,
   title,
 } from "./cart.module.css"
+import Services from "../components/Services"
 
 export default function CartPage() {
   const { checkout, loading } = React.useContext(StoreContext)
@@ -94,8 +95,11 @@ export default function CartPage() {
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={labelColumn}>Envío</td>
-
-                  <td className={totals}>Al ingresar tu domicilio</td>
+                  {checkout.totalPriceV2.amount > 1800 ? (
+                    <td className={totals}>¡GRATIS!</td>
+                  ) : (
+                    <td className={totals}>Al ingresar tu domicilio</td>
+                  )}
                 </tr>
                 <tr className={grandTotal}>
                   <td className={collapseColumn}></td>
@@ -120,6 +124,7 @@ export default function CartPage() {
             </button>
           </>
         )}
+        <Services />
       </div>
     </Layout>
   )
