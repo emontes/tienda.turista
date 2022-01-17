@@ -38,6 +38,7 @@ body {
   font-feature-settings: "kern";
   font-family: var(--font-body);
   color: var(--text-color);
+  background-color: var(--grey-10);
 }
 *,
 *::before,

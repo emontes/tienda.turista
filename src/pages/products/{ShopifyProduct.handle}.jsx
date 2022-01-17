@@ -156,6 +156,7 @@ export default function Product({ data: { product } }) {
                     return (
                       <div key={id}>
                         <div className="select-variant" key={id}>
+                          <div className="select-title">{`Selecciona ${name}`}</div>
                           <select
                             aria-label="Variants"
                             onChange={(event) =>
@@ -170,13 +171,15 @@ export default function Product({ data: { product } }) {
                             ))}
                           </select>
                         </div>
-                        {image && (
-                          <GatsbyImage
-                            image={variant.image.gatsbyImageData}
-                            alt="image"
-                            className=""
-                          />
-                        )}
+                        {index === 0
+                          ? image && (
+                              <GatsbyImage
+                                image={variant.image.gatsbyImageData}
+                                alt="image"
+                                className=""
+                              />
+                            )
+                          : null}
                       </div>
                     )
                   })}
@@ -253,35 +256,47 @@ export default function Product({ data: { product } }) {
 
 const Wrapper = styled.div`
   padding: var(--size-gutter-raw);
+
   .product-box {
-    display: grid;
-    grid-template-columns: 1fr;
-    column-gap: var(--space-3xl);
+    display: flex;
+    flex-direction: column;
     @media ${device.tablet} {
-      grid-template-columns: 1fr 2fr;
-      column-gap: 2rem;
-    }
-    @media ${device.laptop} {
-      grid-template-columns: repeat(2, 1fr);
+      flex-direction: row;
+      align-items: stretch;
+      gap: 1rem;
     }
   }
 
   .product-details {
     margin-top: 3rem;
+    background-color: var(--white);
+    border-radius: 3px;
+    padding: 1rem;
     @media ${device.tablet} {
       margin-top: 0;
     }
   }
 
   .slider {
-    width: 92vw;
+    height: 100%;
 
-    @media ${device.tablet} {
-      width: 95vw;
-    }
     @media ${device.tablet} {
       width: 45vw;
     }
+  }
+
+  .slick-prev,
+  .slick-next {
+    background: var(--grey-40);
+    border-radius: 50%;
+  }
+
+  .slick-prev {
+    left: 3px;
+    z-index: 1;
+  }
+  .slick-next {
+    right: 3px;
   }
 
   .product-image {
@@ -300,8 +315,9 @@ const Wrapper = styled.div`
   }
 
   .product-description {
-    margin: 3rem auto;
-    padding-top: 2rem;
+    background-color: var(--white);
+    margin: 3rem auto 0;
+    padding: 2rem;
     border-top: 2px solid var(--border);
     font-size: var(--text-prose);
   }
@@ -315,9 +331,14 @@ const Wrapper = styled.div`
   }
 
   .price-options-wrapper {
+    padding: 1rem;
     display: flex;
     gap: 1rem;
     align-items: center;
+    flex-direction: column;
+    @media ${device.tablet} {
+      flex-direction: row;
+    }
   }
   .price-value > span {
     font-size: var(--text-display);
@@ -328,13 +349,29 @@ const Wrapper = styled.div`
 
   .price-value {
     padding: var(--space-lg) 0;
+
+    text-align: center;
   }
 
-  .options-wrapper {
+  .video {
+    height: 50vh;
+    width: 100%;
+  }
+
+  .options-wrapper-old {
+    border: 1px solid red;
     display: grid;
     grid-template-columns: var(--product-grid);
     gap: var(--space-lg);
     padding-bottom: var(--space-lg);
+  }
+
+  .options-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20%;
   }
 
   .add-to-cart-style {
@@ -391,11 +428,13 @@ const Wrapper = styled.div`
   }
 
   .tag-list {
-    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     a {
       font-weight: var(--semibold);
       color: var(--text-color-secondary);
-      margin-right: var(--space-md);
+
       border: 1px solid #e5e5e5;
       padding: 2px 5px;
       transition: all 0.3s;
@@ -427,6 +466,8 @@ const Wrapper = styled.div`
     align-items: baseline;
   }
   .bottom-images {
+    background-color: var(--white);
+    padding: 1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

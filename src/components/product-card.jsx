@@ -48,6 +48,7 @@ export function ProductCard({ product, eager }) {
             alt={firstImage?.altText ?? title}
             image={firstImage?.gatsbyImageData ?? storefrontImageData}
             loading={eager ? "eager" : "lazy"}
+            className="image"
           />
         </div>
       ) : (
@@ -65,6 +66,7 @@ export function ProductCard({ product, eager }) {
 }
 
 const Wrapper = styled(Link)`
+  background-color: var(--white);
   max-width: 400px;
   cursor: pointer;
   text-decoration: none;
@@ -72,13 +74,16 @@ const Wrapper = styled(Link)`
   transition: all 0.3s;
   :hover {
     box-shadow: var(--dark-shadow);
-    transform: scale(1.1);
+    transform: scale(1.01);
   }
 
   .productImageStyle {
     margin-bottom: var(--space-md);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  }
+
+  .image {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
 
   .productDetailsStyle {

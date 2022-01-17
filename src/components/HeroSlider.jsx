@@ -67,6 +67,14 @@ const Wrapper = styled(Slider)`
     position: relative;
   }
 
+  .slick-prev {
+    left: 3px;
+  }
+  .slick-next {
+    right: 3px;
+    z-index: -1;
+  }
+
   .hero-container {
     position: absolute;
     top: 0;

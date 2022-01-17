@@ -18,7 +18,7 @@ const data = [
     leth3: "Los Artículos que le encantan al Turista",
     leth4: "Tienda Turista",
     linkText: "Ver Productos",
-    linkGo: "/productos",
+    linkGo: "/products",
   },
   {
     id: "2",
@@ -36,7 +36,7 @@ const data = [
     leth3: "Artículos y novedades en Tecnología",
     leth4: "Accesorios y más",
     linkText: "Compra Ahora",
-    linkGo: "/electronica",
+    linkGo: "/products/electronica",
   },
 ]
 
