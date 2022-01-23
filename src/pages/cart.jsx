@@ -21,6 +21,7 @@ import {
   title,
 } from "./cart.module.css"
 import Services from "../components/Services"
+import styled from "styled-components"
 
 export default function CartPage() {
   const { checkout, loading } = React.useContext(StoreContext)
@@ -32,7 +33,7 @@ export default function CartPage() {
 
   return (
     <Layout>
-      <div className={wrap}>
+      <Wrapper>
         {emptyCart ? (
           <div className={emptyStateContainer}>
             <h1 className={emptyStateHeading}>Tu carrito está vacío</h1>
@@ -124,8 +125,24 @@ export default function CartPage() {
             </button>
           </>
         )}
+      </Wrapper>
+      <div
+        style={{
+          backgroundColor: "var(--white)",
+          margin: "-1rem 0",
+          paddingBottom: "2rem",
+        }}
+      >
         <Services />
       </div>
     </Layout>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 var(--size-gutter-raw);
+  background-color: var(--white);
+`

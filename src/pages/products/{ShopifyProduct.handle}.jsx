@@ -17,11 +17,10 @@ import "slick-carousel/slick/slick-theme.css"
 import device from "../../assets/themes/device"
 
 export default function Product({ data: { product } }) {
-  console.log(" ----> producto", product)
   const {
     options,
     variants,
-    collections,
+    // collections,
     variants: [initialVariant],
     priceRangeV2,
     title,
@@ -90,7 +89,7 @@ export default function Product({ data: { product } }) {
 
   const hasVariants = variants.length > 1
   const hasImages = images.length > 0
-  const hasMultipleImages = true || images.length > 1
+  // const hasMultipleImages = true || images.length > 1
   const sliderSettings = {
     infinite: true,
     speed: 1500,
